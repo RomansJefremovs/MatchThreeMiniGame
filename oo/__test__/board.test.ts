@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeEach } from '@jest/globals'
+import { describe, it, expect, beforeEach } from "@jest/globals"
 import { Generator, Board, BoardEvent } from '../src/board'
 
 class CyclicGenerator implements Generator<string> {
@@ -38,11 +38,12 @@ class GeneratorFake<T> implements Generator<T> {
 
 }
 
+// @ts-ignore
 function require(board: Board<String>) {
     function toEqual(...tiles: String[]) {
-        for(let row: number = 0; row < board.height; row++) {
-            for(let col: number = 0; col < board.width; col ++) {
-                expect(board.piece({row, col})).toEqual(tiles[row * board.width + col])
+        for(let row: number = 0; row < board.height(); row++) {
+            for(let col: number = 0; col < board.width(); col ++) {
+                expect(board.piece({row, col})).toEqual(tiles[row * board.width() + col])
             }
         }
     }
@@ -53,7 +54,6 @@ describe("Board", () => {
     describe("Initial board", () => {
         const generator = new CyclicGenerator('ABC')
         const board = new Board(generator, 2, 3)
-
         it("has the given width", () => {
             expect(board.width).toEqual(2)
         })

@@ -1,2 +1,3 @@
 # Project exclude paths
 /oo/src/board.js
+.idea
